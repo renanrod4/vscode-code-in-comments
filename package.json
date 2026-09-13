@@ -1,0 +1,77 @@
+{
+	"name": "vscode-comment-code-blocks",
+	"displayName": "Comment Code Blocks",
+	"description": "Highlight code blocks in comments for better readability.",
+	"version": "0.0.1",
+	"publisher": "renanrod4",
+	"author": {
+		"name": "Renan Rodrigues de Meneses",
+		"email": "renanrdemeneses@gmail.com",
+		"url": "https://github.com/renanrod4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/renanrod4/vscode-comment-code-blocks.git"
+	},
+	"homepage": "https://github.com/renanrod4/vscode-comment-code-blocks",
+	"bugs": {
+		"url": "https://github.com/renanrod4/vscode-comment-code-blocks/issues"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"icon": "public/icon.png",
+	"main": "./extension.js",
+	"activationEvents": [
+		"*"
+	],
+	"engines": {
+		"vscode": "^1.39.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"highlight",
+		"comment",
+		"markdown",
+		"Code blocks",
+		"syntax highlighting"
+	],
+	"contributes": {
+		"configuration": {
+			"title": "Comment Code Blocks",
+			"properties": {
+				"commentCodeBlocks.opacity": {
+					"type": "number",
+					"default": 0.5,
+					"minimum": 0,
+					"maximum": 1,
+					"description": "Opacity applied to code blocks inside comments."
+				},
+				"commentCodeBlocks.grayscale": {
+					"type": "number",
+					"default": 25,
+					"minimum": 0,
+					"maximum": 100,
+					"description": "Grayscale percentage applied to code blocks inside comments."
+				}
+			}
+		},
+		"grammars": [
+			{
+				"scopeName": "source.comment.message.block",
+				"path": "./syntaxes/comment.message.block.json",
+				"injectTo": [
+					"source"
+				]
+			}
+		]
+	},
+	"devDependencies": {
+		"@types/node": "^10.5.1",
+		"vscode": "^1.1.36",
+		"@vscode/vsce": "^2.15.0"
+	},
+	"scripts": {
+		"build": "vsce package"
+	}
+}
