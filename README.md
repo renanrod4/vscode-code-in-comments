@@ -2,10 +2,10 @@
 
 ## Overview
 
-Comment Code Blocks is a proposed Visual Studio Code extension. Its goal is to
-improve the readability of code examples written inside documentation comments,
-while keeping the example's language recognizable and making the distinction
-between documentation and executable code clear.
+Comment Code Blocks is a Visual Studio Code extension that visually separates
+fenced code examples inside block comments from executable code. It preserves
+the syntax highlighting of the declared language while applying a configurable
+opacity and grayscale effect to the documented example.
 
 ## Motivation
 
@@ -14,19 +14,25 @@ reference files. When these examples look too similar to the rest of the file,
 it can be difficult to quickly identify what belongs to the documentation and
 what belongs to the program.
 
-The extension should provide an additional visual layer for these examples
-without removing the syntax highlighting of the language declared in the block.
+The extension provides an additional visual layer for these examples without
+removing the syntax highlighting of the language declared in the block.
 
 ## Proposal
 
-The extension should recognize code blocks delimited by three backticks when
-they are inside block comments such as `/* ... */`. When a block
-is found, it should:
+The extension recognizes code blocks delimited by three backticks when they are
+inside block comments such as `/* ... */`. When a block is found, it:
 
-- preserve the syntax highlighting for the language declared in the opening;
-- apply a distinct visual appearance to the documented example;
-- allow that appearance to be adjusted by the user;
-- update the result when the editor, document, or settings change.
+- preserves the syntax highlighting for the language declared in the opening;
+- applies a distinct visual appearance to the documented example;
+- allows that appearance to be adjusted by the user;
+- updates the result when the editor, document, or settings change.
+
+## Result
+
+The code inside the comment is intentionally dimmed, while the executable code
+outside the comment keeps its normal appearance.
+
+![Comment Code Blocks preview](public/example.png)
 
 ## Expected usage
 
@@ -44,36 +50,48 @@ is found, it should:
 In this scenario, the block should continue to be recognized as JavaScript while
 also being visually identified as part of a comment.
 
-## Planned configuration
+## Configuration
 
-The extension may provide settings through the VS Code preferences interface and
+The extension provides settings through the VS Code preferences interface and
 through `settings.json`.
 
 ### `commentCodeBlocks.opacity`
 
-This setting should control the opacity applied to code blocks found inside
-comments. The expected value should be a number between `0` and `1`.
+Controls the opacity applied to code blocks found inside comments. The value is a
+number between `0` and `1`. The default is `0.5`.
+
+```json
+{
+   "commentCodeBlocks.opacity": 0.7
+}
+```
 
 ### `commentCodeBlocks.grayscale`
 
-This setting should control the grayscale percentage applied to the blocks. The
-expected value should be a number between `0` and `100`.
+Controls the grayscale percentage applied to the blocks. The value is a number
+between `0` and `100`. The default is `25`.
+
+```json
+{
+   "commentCodeBlocks.grayscale": 40
+}
+```
 
 ## Technical direction
 
-The implementation should combine two VS Code mechanisms:
+The implementation combines two VS Code mechanisms:
 
-1. A TextMate grammar should allow code blocks inside comments to receive syntax
+1. A TextMate grammar allows code blocks inside comments to receive syntax
    highlighting for the declared language.
-2. The extension should identify the relevant blocks and apply a configurable
+2. The extension identifies the relevant blocks and applies a configurable
    visual decoration to the detected ranges.
 
-The behavior should be updated when the user switches editors, edits the
-document, or changes the extension settings.
+The decoration is refreshed when the user switches editors, edits the document,
+or changes the extension settings.
 
 ## Initial scope
 
-The first version should prioritize:
+The current version supports:
 
 - block comments in the `/* ... */` and `/** ... */` forms;
 - blocks enclosed by three backticks;
@@ -81,20 +99,55 @@ The first version should prioritize:
 - configurable opacity and grayscale;
 - a simple testing experience inside an Extension Development Host.
 
-Support for line comments such as `//`, `#`, and `--` may be considered in a
-later stage, along with handling for more complex syntax cases.
+Line comments such as `//`, `#`, and `--` are not currently scanned. The runtime
+detector uses regular expressions, so more complex comment and fence syntax may
+require additional handling.
 
-## Development plan
+## Installation and development
 
-1. Define the extension contribution and its settings.
-2. Create the grammar to integrate fenced blocks into comment scopes.
-3. Detect the ranges that should receive the visual decoration.
-4. Update the decoration while editing and when settings change.
-5. Validate the behavior with examples in different languages.
-6. Document installation, known limitations, and the publishing process.
+### Requirements
+
+- VS Code `1.39.0` or newer.
+- Node.js and npm.
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run locally
+
+1. Open the project in VS Code.
+2. Press `F5` to start an Extension Development Host.
+3. Open a source file containing a fenced code block inside a block comment.
+4. Change the extension settings and verify that the decoration updates.
+
+### Validate the project
+
+```bash
+python3 -m json.tool package.json > /dev/null
+python3 -m json.tool syntaxes/comment.message.block.json > /dev/null
+node --check extension.js
+npm run build
+```
+
+## Project structure
+
+```text
+.
+├── extension.js
+├── public/
+│   └── example.png
+├── syntaxes/
+│   └── comment.message.block.json
+├── test/
+│   └── test.block.rs
+├── package.json
+└── README.md
+```
 
 ## Project status
 
-This repository represents the initial proposal stage. Implementation details,
-default setting values, language support, and the distribution process remain to
-be confirmed during development.
+The first functional version is implemented. Future versions may expand support
+for line comments, improve block detection, and add automated extension tests.
