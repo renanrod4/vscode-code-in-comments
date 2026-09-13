@@ -52,9 +52,9 @@ Additional line-comment examples:
 ```
 
 The extension applies the visual decoration to each matching line. Explicit
-language-specific highlighting for line markers depends on the active grammar;
-the most complete language embedding support is currently provided for block
-markers and fenced code blocks.
+language-specific highlighting for line markers depends on the active grammar.
+JavaScript and Rust also support implicit syntax highlighting when `@code` does
+not include a language name.
 
 The `$` abbreviation can be enabled with `commentCodeBlocks.enableAbbreviations`:
 
@@ -66,8 +66,9 @@ The `$` abbreviation can be enabled with `commentCodeBlocks.enableAbbreviations`
 
 When enabled, `/*$ ... */`, `/*$(rust) ... */`, `//$ ...`, and `//$(rust) ...`
 are accepted as aliases for the corresponding `@code` forms. Explicit Rust
-markers currently receive Rust syntax highlighting; support for more languages
-and implicit language inheritance is planned for later grammar updates.
+markers currently receive Rust syntax highlighting. Implicit language
+inheritance is currently available for JavaScript and Rust; support for more
+languages is planned for later grammar updates.
 
 ## Result
 
@@ -140,6 +141,7 @@ The current version supports:
 - `@code` blocks and inline markers inside block and line comments;
 - optional `$` abbreviations controlled by `commentCodeBlocks.enableAbbreviations`;
 - explicit language markers for the languages covered by the syntax grammar;
+- implicit `@code` syntax highlighting for JavaScript and Rust comments;
 - language identifiers after the opening backticks;
 - syntax highlighting for fenced blocks through the TextMate grammar;
 - configurable opacity and grayscale;
@@ -186,9 +188,15 @@ npm run build
 ├── public/
 │   └── example.png
 ├── syntaxes/
-│   └── comment.message.block.json
+│   ├── comment.message.block.json
+│   ├── comment.message.javascript.json
+│   └── comment.message.rust.json
 ├── test/
-│   └── test.block.rs
+│   ├── langs/
+│   │   ├── js.js
+│   │   └── rs.rs
+│   ├── test.block.rs
+│   └── test.js
 ├── package.json
 └── README.md
 ```
