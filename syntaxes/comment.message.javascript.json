@@ -1,0 +1,19 @@
+{
+	"$schema": "https://raw.githubusercontent.com/RedCMD/TmLanguage-Syntax-Highlighter/main/vscode.tmLanguage.schema.json",
+	"scopeName": "source.comment.message.javascript",
+	"injectionSelector": "L:comment.block.js, L:comment.line.double-slash.js",
+	"patterns": [
+		{
+			"begin": "(?<=//)@code(?!\\()\\s*",
+			"end": "$",
+			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"patterns": [{ "include": "source.js" }]
+		},
+		{
+			"begin": "@code(?!\\()\\s*",
+			"end": "(?=\\*\\/)",
+			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"patterns": [{ "include": "source.js" }]
+		}
+	]
+}

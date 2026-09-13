@@ -252,3 +252,8 @@ let i = 9;
 
 let j = 10;
 
+
+//? isso deve ser interpretado implicitamente como javascript, pois é o padrão do arquivo, então não precisa declarar a linguagem explicitamente
+/*@code
+    let k = 11;
+*/

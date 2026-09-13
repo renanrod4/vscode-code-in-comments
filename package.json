@@ -80,6 +80,20 @@
 				"injectTo": [
 					"source"
 				]
+			},
+			{
+				"scopeName": "source.comment.message.javascript",
+				"path": "./syntaxes/comment.message.javascript.json",
+				"injectTo": [
+					"source.js"
+				]
+			},
+			{
+				"scopeName": "source.comment.message.rust",
+				"path": "./syntaxes/comment.message.rust.json",
+				"injectTo": [
+					"source.rust"
+				]
 			}
 		]
 	},
