@@ -37,6 +37,18 @@
 		"syntax highlighting"
 	],
 	"contributes": {
+		"configurationDefaults": {
+			"editor.tokenColorCustomizations": {
+				"textMateRules": [
+					{
+						"scope": "comment.code.block",
+						"settings": {
+							"foreground": "#D4D4D4"
+						}
+					}
+				]
+			}
+		},
 		"configuration": {
 			"title": "Comment Code Blocks",
 			"properties": {
@@ -53,6 +65,11 @@
 					"minimum": 0,
 					"maximum": 100,
 					"description": "Grayscale percentage applied to code blocks inside comments."
+				},
+				"commentCodeBlocks.enableAbbreviations": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable $ as an abbreviation for @code in line and block comments."
 				}
 			}
 		},

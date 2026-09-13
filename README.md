@@ -27,6 +27,48 @@ inside block comments such as `/* ... */`. When a block is found, it:
 - allows that appearance to be adjusted by the user;
 - updates the result when the editor, document, or settings change.
 
+Line comment markers are also supported with the `@code` syntax. The language
+may be omitted to use the current file language or provided explicitly:
+
+```rust
+/*@code
+let greetings = println!("Hello, world!");
+*/
+
+/*@code(rust)
+let greetings = println!("Hello, world!");
+*/
+
+//@code let greetings = println!("Hello, world!");
+//@code(rust) let greetings = println!("Hello, world!");
+```
+
+Additional line-comment examples:
+
+```javascript
+//@code(javascript) const message = "Hello, world!"; console.log(message);
+//@code(typescript) const userName: string = "Alice";
+//@code(json) { "enabled": true, "name": "comment-code-blocks" }
+```
+
+The extension applies the visual decoration to each matching line. Explicit
+language-specific highlighting for line markers depends on the active grammar;
+the most complete language embedding support is currently provided for block
+markers and fenced code blocks.
+
+The `$` abbreviation can be enabled with `commentCodeBlocks.enableAbbreviations`:
+
+```json
+{
+	"commentCodeBlocks.enableAbbreviations": true
+}
+```
+
+When enabled, `/*$ ... */`, `/*$(rust) ... */`, `//$ ...`, and `//$(rust) ...`
+are accepted as aliases for the corresponding `@code` forms. Explicit Rust
+markers currently receive Rust syntax highlighting; support for more languages
+and implicit language inheritance is planned for later grammar updates.
+
 ## Result
 
 The code inside the comment is intentionally dimmed, while the executable code
@@ -62,7 +104,7 @@ number between `0` and `1`. The default is `0.5`.
 
 ```json
 {
-   "commentCodeBlocks.opacity": 0.7
+	"commentCodeBlocks.opacity": 0.7
 }
 ```
 
@@ -73,7 +115,7 @@ between `0` and `100`. The default is `25`.
 
 ```json
 {
-   "commentCodeBlocks.grayscale": 40
+	"commentCodeBlocks.grayscale": 40
 }
 ```
 
@@ -95,13 +137,17 @@ The current version supports:
 
 - block comments in the `/* ... */` and `/** ... */` forms;
 - blocks enclosed by three backticks;
+- `@code` blocks and inline markers inside block and line comments;
+- optional `$` abbreviations controlled by `commentCodeBlocks.enableAbbreviations`;
+- explicit language markers for the languages covered by the syntax grammar;
 - language identifiers after the opening backticks;
+- syntax highlighting for fenced blocks through the TextMate grammar;
 - configurable opacity and grayscale;
 - a simple testing experience inside an Extension Development Host.
 
-Line comments such as `//`, `#`, and `--` are not currently scanned. The runtime
-detector uses regular expressions, so more complex comment and fence syntax may
-require additional handling.
+Comments using `#` and `--` are not currently scanned. The runtime detector uses
+regular expressions, so more complex comment and marker syntax may require
+additional handling.
 
 ## Installation and development
 
@@ -149,5 +195,6 @@ npm run build
 
 ## Project status
 
-The first functional version is implemented. Future versions may expand support
-for line comments, improve block detection, and add automated extension tests.
+The first functional version is implemented. Future versions may expand syntax
+highlighting for `@code` markers, improve block detection, and add automated
+extension tests.

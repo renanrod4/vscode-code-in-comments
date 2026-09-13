@@ -23,29 +23,42 @@ function activate(context) {
 		if (!activeEditor) return;
 
 		const text = activeEditor.document.getText();
+		const configuration = vscode.workspace.getConfiguration('commentCodeBlocks');
 		const decorations = [];
+		const enableAbbreviations = configuration.get('enableAbbreviations', false);
 
-		// Expressão regular para localizar blocos de comentário /* ... */
+		function addDecoration(startOffset, length) {
+			const start = activeEditor.document.positionAt(startOffset);
+			const end = activeEditor.document.positionAt(startOffset + length);
+			decorations.push({ range: new vscode.Range(start, end) });
+		}
+
+		// Keep fenced blocks supported while adding explicit @code markers.
 		const blockCommentRegex = /\/\*[\s\S]*?\*\//g;
-		// Expressão regular para localizar blocos de código ``` dentro do comentário
-		const codeBlockRegex = /```[\s\S]*?```/g;
-
+		const fencedCodeRegex = /```[\s\S]*?```/g;
 		let match;
 		while ((match = blockCommentRegex.exec(text)) !== null) {
 			const commentText = match[0];
 			const commentStartOffset = match.index;
-
 			let codeMatch;
-			while ((codeMatch = codeBlockRegex.exec(commentText)) !== null) {
-				const startPos = activeEditor.document.positionAt(commentStartOffset + codeMatch.index);
-				const endPos = activeEditor.document.positionAt(
-					commentStartOffset + codeMatch.index + codeMatch[0].length,
-				);
 
-				decorations.push({
-					range: new vscode.Range(startPos, endPos),
-				});
+			while ((codeMatch = fencedCodeRegex.exec(commentText)) !== null) {
+				addDecoration(commentStartOffset + codeMatch.index, codeMatch[0].length);
 			}
+
+			const marker = enableAbbreviations
+				? /\/(?:\*@code|\*\$)(?:\([^)]*\))?[\s\S]*?\*\//g
+				: /\/\*@code(?:\([^)]*\))?[\s\S]*?\*\//g;
+			while ((codeMatch = marker.exec(commentText)) !== null) {
+				addDecoration(commentStartOffset + codeMatch.index, codeMatch[0].length);
+			}
+		}
+
+		const lineCommentRegex = enableAbbreviations
+			? /^\s*\/\/(?:@code|\$)(?:\([^)]*\))?.*$/gm
+			: /^\s*\/\/@code(?:\([^)]*\))?.*$/gm;
+		while ((match = lineCommentRegex.exec(text)) !== null) {
+			addDecoration(match.index, match[0].length);
 		}
 
 		activeEditor.setDecorations(dimmedCommentCodeDecoration, decorations);
