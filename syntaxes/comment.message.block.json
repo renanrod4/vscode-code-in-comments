@@ -5,259 +5,277 @@
 	"patterns": [
 		{
 			"begin": "@code\\(rust\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.rust",
 			"patterns": [{ "include": "source.rust" }]
 		},
 		{
+			"begin": "(?<=//)@code\\(javascript\\)\\s*",
+			"end": "$",
+			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"patterns": [{ "include": "source.js" }]
+		},
+		{
 			"begin": "@code\\(javascript\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.javascript",
 			"patterns": [{ "include": "source.js" }]
 		},
 		{
 			"begin": "@code\\(css\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block source.css",
 			"patterns": [{ "include": "source.css" }]
 		},
 		{
 			"begin": "@code\\(html\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block text.html.basic",
 			"patterns": [{ "include": "text.html.basic" }]
 		},
 		{
 			"begin": "@code\\(python\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.python",
 			"patterns": [{ "include": "source.python" }]
 		},
 		{
+			"begin": "(?<=//)@code\\(typescript\\)\\s*",
+			"end": "$",
+			"contentName": "comment.code.block meta.embedded.block.typescript",
+			"patterns": [{ "include": "source.ts" }]
+		},
+		{
 			"begin": "@code\\(typescript\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.typescript",
 			"patterns": [{ "include": "source.ts" }]
 		},
 		{
 			"begin": "@code\\(tsx\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.tsx",
 			"patterns": [{ "include": "source.tsx" }]
 		},
 		{
+			"begin": "(?<=//)@code\\(json\\)\\s*",
+			"end": "$",
+			"contentName": "comment.code.block meta.embedded.block.json",
+			"patterns": [{ "include": "source.json" }]
+		},
+		{
 			"begin": "@code\\(json\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.json",
 			"patterns": [{ "include": "source.json" }]
 		},
 		{
 			"begin": "@code\\(jsonc\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.jsonc",
 			"patterns": [{ "include": "source.jsonc" }]
 		},
 		{
 			"begin": "@code\\(go\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.go",
 			"patterns": [{ "include": "source.go" }]
 		},
 		{
 			"begin": "@code\\(c\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.c",
 			"patterns": [{ "include": "source.c" }]
 		},
 		{
 			"begin": "@code\\(cpp\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.cpp",
 			"patterns": [{ "include": "source.cpp" }]
 		},
 		{
 			"begin": "@code\\(csharp\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.csharp",
 			"patterns": [{ "include": "source.cs" }]
 		},
 		{
 			"begin": "@code\\(java\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.java",
 			"patterns": [{ "include": "source.java" }]
 		},
 		{
 			"begin": "@code\\(kotlin\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.kotlin",
 			"patterns": [{ "include": "source.kotlin" }]
 		},
 		{
 			"begin": "@code\\(swift\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.swift",
 			"patterns": [{ "include": "source.swift" }]
 		},
 		{
 			"begin": "@code\\(shell\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.shell",
 			"patterns": [{ "include": "source.shell" }]
 		},
 		{
 			"begin": "@code\\(bash\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.bash",
 			"patterns": [{ "include": "source.shell" }]
 		},
 		{
 			"begin": "@code\\(sql\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.sql",
 			"patterns": [{ "include": "source.sql" }]
 		},
 		{
 			"begin": "@code\\(yaml\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.yaml",
 			"patterns": [{ "include": "source.yaml" }]
 		},
 		{
 			"begin": "@code\\(xml\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.xml",
 			"patterns": [{ "include": "text.xml" }]
 		},
 		{
 			"begin": "@code\\(markdown\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.markdown",
 			"patterns": [{ "include": "text.html.markdown" }]
 		},
 		{
 			"begin": "@code\\(lua\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.lua",
 			"patterns": [{ "include": "source.lua" }]
 		},
 		{
 			"begin": "@code\\(ruby\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.ruby",
 			"patterns": [{ "include": "source.ruby" }]
 		},
 		{
 			"begin": "@code\\(php\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.php",
 			"patterns": [{ "include": "text.html.php" }]
 		},
 		{
 			"begin": "@code\\(perl\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.perl",
 			"patterns": [{ "include": "source.perl" }]
 		},
 		{
 			"begin": "@code\\(r\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.r",
 			"patterns": [{ "include": "source.r" }]
 		},
 		{
 			"begin": "@code\\(groovy\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.groovy",
 			"patterns": [{ "include": "source.groovy" }]
 		},
 		{
 			"begin": "@code\\(scala\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.scala",
 			"patterns": [{ "include": "source.scala" }]
 		},
 		{
 			"begin": "@code\\(dart\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.dart",
 			"patterns": [{ "include": "source.dart" }]
 		},
 		{
 			"begin": "@code\\(fsharp\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.fsharp",
 			"patterns": [{ "include": "source.fsharp" }]
 		},
 		{
 			"begin": "@code\\(powershell\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.powershell",
 			"patterns": [{ "include": "source.powershell" }]
 		},
 		{
 			"begin": "@code\\(julia\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.julia",
 			"patterns": [{ "include": "source.julia" }]
 		},
 		{
 			"begin": "@code\\(clojure\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.clojure",
 			"patterns": [{ "include": "source.clojure" }]
 		},
 		{
 			"begin": "@code\\(elixir\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.elixir",
 			"patterns": [{ "include": "source.elixir" }]
 		},
 		{
 			"begin": "@code\\(erlang\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.erlang",
 			"patterns": [{ "include": "source.erlang" }]
 		},
 		{
 			"begin": "@code\\(scss\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.scss",
 			"patterns": [{ "include": "source.css.scss" }]
 		},
 		{
 			"begin": "@code\\(less\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.less",
 			"patterns": [{ "include": "source.css.less" }]
 		},
 		{
 			"begin": "@code\\(diff\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.diff",
 			"patterns": [{ "include": "source.diff" }]
 		},
 		{
 			"begin": "@code\\(dockerfile\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.dockerfile",
 			"patterns": [{ "include": "source.dockerfile" }]
 		},
 		{
 			"begin": "@code\\(latex\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.latex",
 			"patterns": [{ "include": "text.tex.latex" }]
 		},
 		{
 			"begin": "@code\\(bibtex\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.bibtex",
 			"patterns": [{ "include": "text.bibtex" }]
 		},
 		{
 			"begin": "@code\\(twig\\)\\s*",
-			"end": "\\*\\/",
+			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.twig",
 			"patterns": [{ "include": "text.html.twig" }]
 		},

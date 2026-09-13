@@ -1,9 +1,11 @@
+let a = 1;
 /*@code(css)
     body {
         background-color: #f0f0f0;
         font-family: Arial, sans-serif;
     }
 */
+let b = 2;
 
 /*@code(html)
     <!DOCTYPE html>
@@ -20,14 +22,14 @@
         </body>
     </html>
 */
-
+let c = 3;
 /*@code(python)
     def greet(name):
         return f"Hello, {name}!"
 
     print(greet("Alice"))
 */
-
+let d = 4;
 /*@code(java)
     public class Main {
         public static void main(String[] args) {
@@ -224,7 +226,29 @@
         color: #336699;
     }
 */
+let e = 5;
 // Line comment examples
-//@code(javascript) const message = "Hello, world!"; console.log(message);
+
+//@code(javascript) const message = "Hello, world!";
+let f = 6;
 //@code(typescript) const userName: string = "Alice";
+let g = 7;
+
 //@code(json) { "enabled": true, "name": "comment-code-blocks" }
+
+let h = 8;
+
+/*@code(json)
+    {
+        "name": "comment-code-blocks",
+        "enabled": true,
+        "languages": ["javascript", "rust", "python"]
+    }
+*/  
+   
+let i = 9;
+
+//@code(json) { "enabled": true, "name": "comment-code-blocks" }
+
+let j = 10;
+
