@@ -1,0 +1,26 @@
+{
+	"$schema": "https://raw.githubusercontent.com/RedCMD/TmLanguage-Syntax-Highlighter/main/vscode.tmLanguage.schema.json",
+	"scopeName": "source.comment.message.python",
+	"injectionSelector": "L:source.python",
+	"patterns": [
+		{
+			"begin": "^[ \\t]*#[ \\t]*@code(?!\\()\\s*",
+			"end": "$",
+			"contentName": "comment.code.block meta.embedded.block.python",
+			"patterns": [{ "include": "source.python" }]
+		},
+		{
+			"begin": "^[ \\t]*#[ \\t]*@code\\(python\\)\\s*",
+			"end": "$",
+			"contentName": "comment.code.block meta.embedded.block.python",
+			"patterns": [{ "include": "source.python" }]
+		},
+		{
+			"begin": "'''[ \\t]*py[ \\t]*$",
+			"end": "^[ \\t]*'''[ \\t]*$",
+			"applyEndPatternLast": false,
+			"contentName": "comment.code.block meta.embedded.block.python",
+			"patterns": [{ "include": "source.python" }]
+		}
+	]
+}

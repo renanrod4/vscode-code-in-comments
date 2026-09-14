@@ -94,6 +94,13 @@
 				"injectTo": [
 					"source.rust"
 				]
+			},
+			{
+				"scopeName": "source.comment.message.python",
+				"path": "./syntaxes/comment.message.python.json",
+				"injectTo": [
+					"source.python"
+				]
 			}
 		]
 	},

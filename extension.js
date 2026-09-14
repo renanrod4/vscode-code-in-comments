@@ -37,6 +37,17 @@ function activate(context) {
 		const blockCommentRegex = /\/\*[\s\S]*?\*\//g;
 		const fencedCodeRegex = /```[\s\S]*?```/g;
 		let match;
+		if (activeEditor.document.languageId === 'python') {
+			const pythonCodeRegex = /'''[ \t]*py[ \t]*\r?\n[\s\S]*?'''/g;
+			while ((match = pythonCodeRegex.exec(text)) !== null) {
+				addDecoration(match.index, match[0].length);
+			}
+
+			const pythonLineCommentRegex = /^\s*#\s*@code(?:\([^)]*\))?.*$/gm;
+			while ((match = pythonLineCommentRegex.exec(text)) !== null) {
+				addDecoration(match.index, match[0].length);
+			}
+		}
 		while ((match = blockCommentRegex.exec(text)) !== null) {
 			const commentText = match[0];
 			const commentStartOffset = match.index;
