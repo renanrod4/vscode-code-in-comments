@@ -20,6 +20,12 @@
 			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.rust",
 			"patterns": [{ "include": "source.rust" }]
+		},
+		{
+			"begin": "@code\\(rust\\)\\s*",
+			"end": "(?=\\*\\/)",
+			"contentName": "comment.code.block meta.embedded.block.rust",
+			"patterns": [{ "include": "source.rust" }]
 		}
 	]
 }

@@ -17,3 +17,4 @@ let e = 5;
 
 
 //? Estou colocando uma variavel a cada linha para verificar se a extensão não está deixando "vazar" o highlight do código comentado
+

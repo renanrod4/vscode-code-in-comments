@@ -14,6 +14,12 @@
 			"end": "(?=\\*\\/)",
 			"contentName": "comment.code.block meta.embedded.block.javascript",
 			"patterns": [{ "include": "source.js" }]
+		},
+		{
+			"begin": "@code\\(javascript\\)\\s*",
+			"end": "(?=\\*\\/)",
+			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"patterns": [{ "include": "source.js" }]
 		}
 	]
 }
