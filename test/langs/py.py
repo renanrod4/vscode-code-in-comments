@@ -1,28 +1,28 @@
 def main():
     value_a = 1
 
-    """py
+    '''py
         this_must_be_highlighted = true
         print(this_must_be_highlighted + "noice!")
-    """
+    '''
 
     value_b = 2
 
-    """
+    '''
         no_syntax_highlighting_here = true
-    """
+    '''
 
     value_c = 3
-    # @code(python) line_explicit = 12
+    #@code(python) line_explicit = 12
     value_line_between = 13
-    # @code line_implicit = 14
+    #@code line_implicit = 14
 
     # Comments with # remain ordinary comments unless followed by @code.
 
-    """py
+    '''py
     value_m = 12
     print(value_m)
-    """
+    '''
 
     value_d = 4
 

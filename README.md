@@ -1,8 +1,8 @@
-# Comment Code Blocks
+# CodeInComments
 
 ## Overview
 
-Comment Code Blocks is a Visual Studio Code extension that visually separates
+CodeInComments is a Visual Studio Code extension that visually separates
 fenced code examples inside block comments from executable code. It preserves
 the syntax highlighting of the declared language while applying a configurable
 opacity and grayscale effect to the documented example.

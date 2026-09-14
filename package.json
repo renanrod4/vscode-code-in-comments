@@ -1,13 +1,13 @@
 {
-	"name": "vscode-comment-code-blocks",
-	"displayName": "Comment Code Blocks",
-	"description": "Highlight code blocks in comments for better readability.",
+	"name": "vscode-code-in-comments",
+	"displayName": "CodeInComments",
+	"description": "Highlight code blocks inside comments in VSCode!",
 	"version": "0.0.1",
 	"publisher": "renanrod4",
 	"author": {
 		"name": "Renan Rodrigues de Meneses",
 		"email": "renanrdemeneses@gmail.com",
-		"url": "https://github.com/renanrod4"
+		"url": "https://renanrod.vercel.app"
 	},
 	"repository": {
 		"type": "git",
@@ -50,7 +50,7 @@
 			}
 		},
 		"configuration": {
-			"title": "Comment Code Blocks",
+			"title": "CodeInComments",
 			"properties": {
 				"commentCodeBlocks.opacity": {
 					"type": "number",
