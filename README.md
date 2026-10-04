@@ -4,6 +4,8 @@ CodeInComments is a Visual Studio Code extension that highlights code markers
 inside comments while preserving the syntax highlighting of the current file
 language. The marked code receives configurable opacity and grayscale effects.
 
+![CodeInComments preview](public/example.webp)
+
 ## Supported markers
 
 The extension supports implicit `@code` markers. The language is inferred from
