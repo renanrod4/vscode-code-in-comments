@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const { findCodeRanges } = require('./marker-ranges');
 
 function activate(context) {
 	let activeEditor = vscode.window.activeTextEditor;
@@ -24,44 +25,14 @@ function activate(context) {
 
 		const text = activeEditor.document.getText();
 		const configuration = vscode.workspace.getConfiguration('codeInComments');
-		const decorations = [];
 		const enableAbbreviations = configuration.get('enableAbbreviations', false);
-
-		function addDecoration(startOffset, length) {
-			const start = activeEditor.document.positionAt(startOffset);
-			const end = activeEditor.document.positionAt(startOffset + length);
-			decorations.push({ range: new vscode.Range(start, end) });
-		}
-
-		const blockCommentRegex = /\/\*[\s\S]*?\*\//g;
-		let match;
-		if (activeEditor.document.languageId === 'python') {
-			const pythonLineCommentRegex = enableAbbreviations
-				? /^\s*#\s*(?:@code|\$)(?!\().*$/gm
-				: /^\s*#\s*@code(?!\().*$/gm;
-			while ((match = pythonLineCommentRegex.exec(text)) !== null) {
-				addDecoration(match.index, match[0].length);
-			}
-		}
-		while ((match = blockCommentRegex.exec(text)) !== null) {
-			const commentText = match[0];
-			const commentStartOffset = match.index;
-			let codeMatch;
-
-			const marker = enableAbbreviations
-				? /\/(?:\*@code(?![(])|\*\$(?![(]))[\s\S]*?\*\//g
-				: /\/\*@code(?![(])[\s\S]*?\*\//g;
-			while ((codeMatch = marker.exec(commentText)) !== null) {
-				addDecoration(commentStartOffset + codeMatch.index, codeMatch[0].length);
-			}
-		}
-
-		const lineCommentRegex = enableAbbreviations
-			? /^\s*\/\/(?:@code(?![(])|\$(?![(])).*$/gm
-			: /^\s*\/\/@code(?![(]).*$/gm;
-		while ((match = lineCommentRegex.exec(text)) !== null) {
-			addDecoration(match.index, match[0].length);
-		}
+		const decorations = findCodeRanges(text, activeEditor.document.languageId, enableAbbreviations).map(
+			({ start, length }) => {
+				const rangeStart = activeEditor.document.positionAt(start);
+				const rangeEnd = activeEditor.document.positionAt(start + length);
+				return { range: new vscode.Range(rangeStart, rangeEnd) };
+			},
+		);
 
 		activeEditor.setDecorations(dimmedCommentCodeDecoration, decorations);
 	}
