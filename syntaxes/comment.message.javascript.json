@@ -6,19 +6,29 @@
 		{
 			"begin": "(?<=//)@code(?!\\()\\s*",
 			"end": "$",
-			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.javascript",
+			"patterns": [{ "include": "source.js" }]
+		},
+		{
+			"begin": "(?<=//)\\$\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.javascript",
 			"patterns": [{ "include": "source.js" }]
 		},
 		{
 			"begin": "@code(?!\\()\\s*",
-			"end": "(?=\\*\\/)",
-			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"end": "(?=\\*/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.javascript",
 			"patterns": [{ "include": "source.js" }]
 		},
 		{
-			"begin": "@code\\(javascript\\)\\s*",
-			"end": "(?=\\*\\/)",
-			"contentName": "comment.code.block meta.embedded.block.javascript",
+			"begin": "\\$\\s*",
+			"end": "(?=\\*/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.javascript",
 			"patterns": [{ "include": "source.js" }]
 		}
 	]

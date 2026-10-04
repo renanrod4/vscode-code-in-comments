@@ -1,10 +1,10 @@
 let a = 1;
-/*@code(javascript)
+/*@code
     let k = 11;
 */
 
 let b = 2;
-//@code(javascript) let m = 12;
+//@code let m = 12;
 let c = 3;
 
 /*@code
@@ -12,9 +12,19 @@ let c = 3;
 */
 let d = 4;
 
-//@code let p = 14;
-let e = 5;
+/*$
+  let a = 54;
+  if (a<5){
+    console.log(a)
+  }
 
+*/
+
+
+
+//@code let p = 14;
+//$ let code a = 5;
+let e = 5;
 
 //? Estou colocando uma variavel a cada linha para verificar se a extensão não está deixando "vazar" o highlight do código comentado
 

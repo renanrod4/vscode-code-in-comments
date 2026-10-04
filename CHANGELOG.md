@@ -2,9 +2,11 @@
 
 ## Unreleased
 
-- Add implicit syntax highlighting for `@code` markers without an explicit
-  language in JavaScript and Rust comments.
-- Add JavaScript and Rust comment grammars for embedded code markers.
+- Remove support for fenced code blocks; only `@code` and `$` markers are
+	supported.
+- Restrict syntax highlighting to the current file language.
+- Leave explicit language markers such as `@code(javascript)` pending.
+- Add implicit JavaScript, Rust, and Python comment grammars.
 
 ## 0.0.1
 

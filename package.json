@@ -21,7 +21,9 @@
 	"icon": "public/icon.png",
 	"main": "./extension.js",
 	"activationEvents": [
-		"*"
+		"onLanguage:javascript",
+		"onLanguage:rust",
+		"onLanguage:python"
 	],
 	"engines": {
 		"vscode": "^1.39.0"
@@ -52,21 +54,21 @@
 		"configuration": {
 			"title": "CodeInComments",
 			"properties": {
-				"commentCodeBlocks.opacity": {
+				"codeInComments.opacity": {
 					"type": "number",
 					"default": 0.5,
 					"minimum": 0,
 					"maximum": 1,
 					"description": "Opacity applied to code blocks inside comments."
 				},
-				"commentCodeBlocks.grayscale": {
+				"codeInComments.grayscale": {
 					"type": "number",
 					"default": 25,
 					"minimum": 0,
 					"maximum": 100,
 					"description": "Grayscale percentage applied to code blocks inside comments."
 				},
-				"commentCodeBlocks.enableAbbreviations": {
+				"codeInComments.enableAbbreviations": {
 					"type": "boolean",
 					"default": false,
 					"description": "Enable $ as an abbreviation for @code in line and block comments."
@@ -74,13 +76,6 @@
 			}
 		},
 		"grammars": [
-			{
-				"scopeName": "source.comment.message.block",
-				"path": "./syntaxes/comment.message.block.json",
-				"injectTo": [
-					"source"
-				]
-			},
 			{
 				"scopeName": "source.comment.message.javascript",
 				"path": "./syntaxes/comment.message.javascript.json",
@@ -106,8 +101,8 @@
 	},
 	"devDependencies": {
 		"@types/node": "^10.5.1",
-		"vscode": "^1.1.36",
-		"@vscode/vsce": "^2.15.0"
+		"@vscode/vsce": "^4.0.0",
+		"vscode": "^1.1.36"
 	},
 	"scripts": {
 		"build": "vsce package"

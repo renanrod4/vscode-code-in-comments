@@ -6,20 +6,15 @@
 		{
 			"begin": "^[ \\t]*#[ \\t]*@code(?!\\()\\s*",
 			"end": "$",
-			"contentName": "comment.code.block meta.embedded.block.python",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.python",
 			"patterns": [{ "include": "source.python" }]
 		},
 		{
-			"begin": "^[ \\t]*#[ \\t]*@code\\(python\\)\\s*",
+			"begin": "^[ \\t]*#[ \\t]*\\$\\s*",
 			"end": "$",
-			"contentName": "comment.code.block meta.embedded.block.python",
-			"patterns": [{ "include": "source.python" }]
-		},
-		{
-			"begin": "'''[ \\t]*py[ \\t]*$",
-			"end": "^[ \\t]*'''[ \\t]*$",
-			"applyEndPatternLast": false,
-			"contentName": "comment.code.block meta.embedded.block.python",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.python",
 			"patterns": [{ "include": "source.python" }]
 		}
 	]

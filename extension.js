@@ -9,7 +9,7 @@ function activate(context) {
 			dimmedCommentCodeDecoration.dispose();
 		}
 
-		const configuration = vscode.workspace.getConfiguration('commentCodeBlocks');
+		const configuration = vscode.workspace.getConfiguration('codeInComments');
 		const opacity = configuration.get('opacity', 0.5);
 		const grayscale = configuration.get('grayscale', 25);
 
@@ -23,7 +23,7 @@ function activate(context) {
 		if (!activeEditor) return;
 
 		const text = activeEditor.document.getText();
-		const configuration = vscode.workspace.getConfiguration('commentCodeBlocks');
+		const configuration = vscode.workspace.getConfiguration('codeInComments');
 		const decorations = [];
 		const enableAbbreviations = configuration.get('enableAbbreviations', false);
 
@@ -33,17 +33,12 @@ function activate(context) {
 			decorations.push({ range: new vscode.Range(start, end) });
 		}
 
-		// Keep fenced blocks supported while adding explicit @code markers.
 		const blockCommentRegex = /\/\*[\s\S]*?\*\//g;
-		const fencedCodeRegex = /```[\s\S]*?```/g;
 		let match;
 		if (activeEditor.document.languageId === 'python') {
-			const pythonCodeRegex = /'''[ \t]*py[ \t]*\r?\n[\s\S]*?'''/g;
-			while ((match = pythonCodeRegex.exec(text)) !== null) {
-				addDecoration(match.index, match[0].length);
-			}
-
-			const pythonLineCommentRegex = /^\s*#\s*@code(?:\([^)]*\))?.*$/gm;
+			const pythonLineCommentRegex = enableAbbreviations
+				? /^\s*#\s*(?:@code|\$)(?!\().*$/gm
+				: /^\s*#\s*@code(?!\().*$/gm;
 			while ((match = pythonLineCommentRegex.exec(text)) !== null) {
 				addDecoration(match.index, match[0].length);
 			}
@@ -53,21 +48,17 @@ function activate(context) {
 			const commentStartOffset = match.index;
 			let codeMatch;
 
-			while ((codeMatch = fencedCodeRegex.exec(commentText)) !== null) {
-				addDecoration(commentStartOffset + codeMatch.index, codeMatch[0].length);
-			}
-
 			const marker = enableAbbreviations
-				? /\/(?:\*@code|\*\$)(?:\([^)]*\))?[\s\S]*?\*\//g
-				: /\/\*@code(?:\([^)]*\))?[\s\S]*?\*\//g;
+				? /\/(?:\*@code(?![(])|\*\$(?![(]))[\s\S]*?\*\//g
+				: /\/\*@code(?![(])[\s\S]*?\*\//g;
 			while ((codeMatch = marker.exec(commentText)) !== null) {
 				addDecoration(commentStartOffset + codeMatch.index, codeMatch[0].length);
 			}
 		}
 
 		const lineCommentRegex = enableAbbreviations
-			? /^\s*\/\/(?:@code|\$)(?:\([^)]*\))?.*$/gm
-			: /^\s*\/\/@code(?:\([^)]*\))?.*$/gm;
+			? /^\s*\/\/(?:@code(?![(])|\$(?![(])).*$/gm
+			: /^\s*\/\/@code(?![(]).*$/gm;
 		while ((match = lineCommentRegex.exec(text)) !== null) {
 			addDecoration(match.index, match[0].length);
 		}
@@ -103,7 +94,7 @@ function activate(context) {
 
 	vscode.workspace.onDidChangeConfiguration(
 		event => {
-			if (event.affectsConfiguration('commentCodeBlocks')) {
+			if (event.affectsConfiguration('codeInComments')) {
 				updateDecorationType();
 				updateDecorations();
 			}

@@ -6,24 +6,28 @@
 		{
 			"begin": "^[ \\t]*//[ \\t]*@code(?!\\()\\s*",
 			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
 			"contentName": "comment.code.block meta.embedded.block.rust",
 			"patterns": [{ "include": "source.rust" }]
 		},
 		{
-			"begin": "^[ \\t]*//[ \\t]*@code\\(rust\\)\\s*",
+			"begin": "^[ \\t]*//[ \\t]*\\$\\s*",
 			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
 			"contentName": "comment.code.block meta.embedded.block.rust",
 			"patterns": [{ "include": "source.rust" }]
 		},
 		{
 			"begin": "@code(?!\\()\\s*",
 			"end": "(?=\\*\\/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
 			"contentName": "comment.code.block meta.embedded.block.rust",
 			"patterns": [{ "include": "source.rust" }]
 		},
 		{
-			"begin": "@code\\(rust\\)\\s*",
+			"begin": "\\$\\s*",
 			"end": "(?=\\*\\/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
 			"contentName": "comment.code.block meta.embedded.block.rust",
 			"patterns": [{ "include": "source.rust" }]
 		}
