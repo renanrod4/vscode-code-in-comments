@@ -3,7 +3,7 @@
 	"displayName": "CodeInComments",
 	"description": "Highlight code blocks inside comments in VSCode!",
 	"version": "0.0.1",
-	"publisher": "renanrod4",
+	"publisher": "renanrod",
 	"author": {
 		"name": "Renan Rodrigues de Meneses",
 		"email": "renanrdemeneses@gmail.com",
