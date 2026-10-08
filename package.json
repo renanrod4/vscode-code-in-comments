@@ -2,7 +2,7 @@
 	"name": "vscode-code-in-comments",
 	"displayName": "CodeInComments",
 	"description": "Highlight code blocks inside comments in VSCode!",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "renanrod",
 	"author": {
 		"name": "Renan Rodrigues de Meneses",

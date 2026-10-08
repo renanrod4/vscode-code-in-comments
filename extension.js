@@ -43,7 +43,7 @@ function activate(context) {
 		updateDecorations();
 	}
 
-	// Atualiza as decorações quando o usuário muda de arquivo ou digita
+	// Recalculate ranges when the active document or its content changes.
 	vscode.window.onDidChangeActiveTextEditor(
 		editor => {
 			activeEditor = editor;

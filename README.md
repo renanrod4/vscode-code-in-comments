@@ -20,8 +20,8 @@ console.log(message);
 //@code const enabled = true;
 ```
 
-Explicit language markers such as `@code(javascript)` are not supported.
-Fenced blocks using triple backticks are also not supported.
+The language is inferred from the host file, so markers stay concise and do not
+need a language name.
 
 The `$` abbreviation can be enabled with `codeInComments.enableAbbreviations`:
 

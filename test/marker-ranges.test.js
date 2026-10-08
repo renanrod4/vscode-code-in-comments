@@ -26,8 +26,32 @@ test('finds Python @code and dollar line markers', () => {
 	assert.equal(findCodeRanges(text, 'python', true).length, 2);
 });
 
-test('ignores explicit language markers and fenced blocks', () => {
+test('ignores marker-like text that is not an implicit marker', () => {
+	// Parenthesized suffixes and fenced text must not partially match @code.
 	const text = '/*@code(javascript) value = 1;*/\n```javascript\nvalue = 2;\n```';
 
 	assert.equal(findCodeRanges(text, 'javascript', true).length, 0);
 });
+
+test('does not decorate nested JavaScript comments', () => {
+	// The code is dimmed, but the trailing comment should retain its normal color.
+	const text = '//@code const value = 1; // keep this comment normal';
+	const ranges = findCodeRanges(text, 'javascript', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code const value = 1; '],
+	);
+});
+
+test('does not decorate nested Python comments', () => {
+	// Python's nested comment delimiter is # rather than //.
+	const text = '# @code value = 1 # keep this comment normal';
+	const ranges = findCodeRanges(text, 'python', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['# @code value = 1 '],
+	);
+});
+
