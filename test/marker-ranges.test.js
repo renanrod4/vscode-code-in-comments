@@ -55,3 +55,13 @@ test('does not decorate nested Python comments', () => {
 	);
 });
 
+test('can decorate nested comments when preservation is disabled', () => {
+	const text = '//@code const value = 1; // dim this too';
+	const ranges = findCodeRanges(text, 'javascript', false, false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code const value = 1; // dim this too'],
+	);
+});
+

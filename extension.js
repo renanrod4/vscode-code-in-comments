@@ -14,6 +14,8 @@ function activate(context) {
 		const opacity = configuration.get('opacity', 0.5);
 		const grayscale = configuration.get('grayscale', 25);
 
+		// VS Code accepts opacity directly; the filter is embedded in textDecoration
+		// because this is the supported way to apply grayscale to a text range.
 		dimmedCommentCodeDecoration = vscode.window.createTextEditorDecorationType({
 			opacity: String(opacity),
 			textDecoration: `none; filter: grayscale(${grayscale}%);`,
@@ -26,13 +28,18 @@ function activate(context) {
 		const text = activeEditor.document.getText();
 		const configuration = vscode.workspace.getConfiguration('codeInComments');
 		const enableAbbreviations = configuration.get('enableAbbreviations', false);
-		const decorations = findCodeRanges(text, activeEditor.document.languageId, enableAbbreviations).map(
-			({ start, length }) => {
-				const rangeStart = activeEditor.document.positionAt(start);
-				const rangeEnd = activeEditor.document.positionAt(start + length);
-				return { range: new vscode.Range(rangeStart, rangeEnd) };
-			},
-		);
+		const preserveNestedComments = configuration.get('preserveNestedComments', true);
+		// Keep offset detection independent from VS Code so it can be unit-tested.
+		const decorations = findCodeRanges(
+			text,
+			activeEditor.document.languageId,
+			enableAbbreviations,
+			preserveNestedComments,
+		).map(({ start, length }) => {
+			const rangeStart = activeEditor.document.positionAt(start);
+			const rangeEnd = activeEditor.document.positionAt(start + length);
+			return { range: new vscode.Range(rangeStart, rangeEnd) };
+		});
 
 		activeEditor.setDecorations(dimmedCommentCodeDecoration, decorations);
 	}

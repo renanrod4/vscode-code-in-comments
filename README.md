@@ -36,6 +36,8 @@ the corresponding implicit `@code` forms.
 
 Syntax highlighting for implicit markers is currently implemented for
 JavaScript, Rust, and Python. Support for additional host languages is pending.
+Comments nested inside marked code keep the normal comment color and are not
+affected by opacity or grayscale.
 
 ## Configuration
 
@@ -60,6 +62,12 @@ Controls the grayscale percentage applied to marked code. The value is between
 	"codeInComments.grayscale": 40
 }
 ```
+
+### `codeInComments.preserveNestedComments`
+
+Keeps comments inside highlighted code at their normal color and prevents them
+from receiving opacity or grayscale. The default is `true`. Set it to `false`
+to apply the effects to the entire highlighted range.
 
 ## Development
 

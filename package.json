@@ -72,6 +72,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Enable $ as an abbreviation for @code in line and block comments."
+				},
+				"codeInComments.preserveNestedComments": {
+					"type": "boolean",
+					"default": true,
+					"description": "Keep comments inside highlighted code at their normal color and effects."
 				}
 			}
 		},
