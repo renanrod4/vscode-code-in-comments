@@ -65,3 +65,36 @@ test('can decorate nested comments when preservation is disabled', () => {
 	);
 });
 
+test('finds implicit Go block and line markers', () => {
+	const text = '/*@code\nvalue := 1\n*/\n//@code other := 2';
+	const ranges = findCodeRanges(text, 'go', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['/*@code\nvalue := 1\n*/', '//@code other := 2'],
+	);
+});
+
+test('finds Go dollar markers only when abbreviations are enabled', () => {
+	const text = '/*$\nvalue := 1\n*/\n//$ other := 2';
+
+	assert.equal(findCodeRanges(text, 'go', false).length, 0);
+	assert.equal(findCodeRanges(text, 'go', true).length, 2);
+});
+
+test('does not decorate nested Go comments', () => {
+	// Go shares the // comment form, so the generic nested comment split applies.
+	const text = '//@code value := 1 // keep this comment normal';
+	const ranges = findCodeRanges(text, 'go', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code value := 1 '],
+	);
+});
+
+test('ignores Go markers with an explicit language name', () => {
+	const text = '/*@code(go) value := 1*/\n//@code(go) other := 2';
+
+	assert.equal(findCodeRanges(text, 'go', true).length, 0);
+});

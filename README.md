@@ -35,7 +35,8 @@ When enabled, `/*$ ... */`, `//$ ...`, and `#$ ...` are accepted as aliases for
 the corresponding implicit `@code` forms.
 
 Syntax highlighting for implicit markers is currently implemented for
-JavaScript, Rust, and Python. Support for additional host languages is pending.
+JavaScript, Rust, Python, and Go. Support for additional host languages is
+pending.
 Comments nested inside marked code keep the normal comment color and are not
 affected by opacity or grayscale.
 
@@ -83,7 +84,8 @@ npm install
 ```
 
 Open the project in VS Code and press `F5` to start an Extension Development
-Host. Open a JavaScript, Rust, or Python file containing a supported marker.
+Host. Open a JavaScript, Rust, Python, or Go file containing a supported
+marker.
 
 ### Validate
 
@@ -103,11 +105,13 @@ npm run build
 ├── public/
 │   └── example.webp
 ├── syntaxes/
+│   ├── comment.message.go.json
 │   ├── comment.message.javascript.json
 │   ├── comment.message.python.json
 │   └── comment.message.rust.json
 ├── test/
 │   ├── langs/
+│   │   ├── go.go
 │   │   ├── js.js
 │   │   ├── py.py
 │   │   └── rs.rs

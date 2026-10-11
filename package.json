@@ -2,7 +2,7 @@
 	"name": "vscode-code-in-comments",
 	"displayName": "CodeInComments",
 	"description": "Highlight code blocks inside comments in VSCode!",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"publisher": "renanrod",
 	"author": {
 		"name": "Renan Rodrigues de Meneses",
@@ -23,7 +23,8 @@
 	"activationEvents": [
 		"onLanguage:javascript",
 		"onLanguage:rust",
-		"onLanguage:python"
+		"onLanguage:python",
+		"onLanguage:go"
 	],
 	"engines": {
 		"vscode": "^1.39.0"
@@ -100,6 +101,13 @@
 				"path": "./syntaxes/comment.message.python.json",
 				"injectTo": [
 					"source.python"
+				]
+			},
+			{
+				"scopeName": "source.comment.message.go",
+				"path": "./syntaxes/comment.message.go.json",
+				"injectTo": [
+					"source.go"
 				]
 			}
 		]
