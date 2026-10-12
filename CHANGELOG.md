@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Add JSX and TSX support: `@code` and `$` markers in `//` and `/* */` comments
+
 ## 0.2.0
 
 - Add TypeScript support: `@code` and `$` markers in `//` and `/* */` comments

@@ -1,0 +1,35 @@
+{
+	"$schema": "https://raw.githubusercontent.com/RedCMD/TmLanguage-Syntax-Highlighter/main/vscode.tmLanguage.schema.json",
+	"scopeName": "source.comment.message.typescriptreact",
+	"injectionSelector": "L:comment.block.ts, L:comment.block.tsx, L:comment.line.double-slash.ts, L:comment.line.double-slash.tsx",
+	"patterns": [
+		{
+			"begin": "(?<=//)@code(?!\\()\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.typescriptreact",
+			"patterns": [{ "include": "source.tsx" }]
+		},
+		{
+			"begin": "(?<=//)\\$\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.typescriptreact",
+			"patterns": [{ "include": "source.tsx" }]
+		},
+		{
+			"begin": "@code(?!\\()\\s*",
+			"end": "(?=\\*/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.typescriptreact",
+			"patterns": [{ "include": "source.tsx" }]
+		},
+		{
+			"begin": "\\$\\s*",
+			"end": "(?=\\*/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.typescriptreact",
+			"patterns": [{ "include": "source.tsx" }]
+		}
+	]
+}

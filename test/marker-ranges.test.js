@@ -132,3 +132,59 @@ test('ignores TypeScript markers with an explicit language name', () => {
 
 	assert.equal(findCodeRanges(text, 'typescript', true).length, 0);
 });
+
+test('finds implicit JSX block and line markers', () => {
+	const text = '/*@code\nconst x = 1;\n*/\n//@code const y = "hello";\n{/*@code\nconst z = 2;\n*/}';
+	const ranges = findCodeRanges(text, 'javascriptreact', false);
+
+	// Block markers are collected before line markers; order is not positional.
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['/*@code\nconst x = 1;\n*/', '/*@code\nconst z = 2;\n*/', '//@code const y = "hello";'],
+	);
+});
+
+test('finds JSX dollar markers only when abbreviations are enabled', () => {
+	const text = '/*$\nconst x = 1;\n*/\n//$ const y = "hello";';
+
+	assert.equal(findCodeRanges(text, 'javascriptreact', false).length, 0);
+	assert.equal(findCodeRanges(text, 'javascriptreact', true).length, 2);
+});
+
+test('does not decorate nested JSX comments', () => {
+	const text = '//@code const x = 1; // keep this comment normal';
+	const ranges = findCodeRanges(text, 'javascriptreact', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code const x = 1; '],
+	);
+});
+
+test('finds implicit TSX block and line markers', () => {
+	const text = '/*@code\nconst x: number = 1;\n*/\n//@code const y: string = "hello";\n{/*@code\nconst z: number = 2;\n*/}';
+	const ranges = findCodeRanges(text, 'typescriptreact', false);
+
+	// Block markers are collected before line markers; order is not positional.
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['/*@code\nconst x: number = 1;\n*/', '/*@code\nconst z: number = 2;\n*/', '//@code const y: string = "hello";'],
+	);
+});
+
+test('finds TSX dollar markers only when abbreviations are enabled', () => {
+	const text = '/*$\nconst x: number = 1;\n*/\n//$ const y: string = "hello";';
+
+	assert.equal(findCodeRanges(text, 'typescriptreact', false).length, 0);
+	assert.equal(findCodeRanges(text, 'typescriptreact', true).length, 2);
+});
+
+test('does not decorate nested TSX comments', () => {
+	const text = '//@code const x: number = 1; // keep this comment normal';
+	const ranges = findCodeRanges(text, 'typescriptreact', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code const x: number = 1; '],
+	);
+});

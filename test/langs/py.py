@@ -6,7 +6,7 @@ def main():
     value_c = 3
     # @code line_implicit = 12
     value_line_between = 13
-    # @code line_implicit = 14
+    # @code line_implicit = 14 # ! Isso é um comentário normal de erro dentro de um comentário de highlight
 
     # Comments with # remain ordinary comments unless followed by @code.
 
