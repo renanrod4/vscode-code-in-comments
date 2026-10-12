@@ -98,3 +98,37 @@ test('ignores Go markers with an explicit language name', () => {
 
 	assert.equal(findCodeRanges(text, 'go', true).length, 0);
 });
+
+test('finds implicit TypeScript block and line markers', () => {
+	const text = '/*@code\nconst x: number = 1;\n*/\n//@code const y: string = "hello";';
+	const ranges = findCodeRanges(text, 'typescript', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['/*@code\nconst x: number = 1;\n*/', '//@code const y: string = "hello";'],
+	);
+});
+
+test('finds TypeScript dollar markers only when abbreviations are enabled', () => {
+	const text = '/*$\nconst x: number = 1;\n*/\n//$ const y: string = "hello";';
+
+	assert.equal(findCodeRanges(text, 'typescript', false).length, 0);
+	assert.equal(findCodeRanges(text, 'typescript', true).length, 2);
+});
+
+test('does not decorate nested TypeScript comments', () => {
+	// TypeScript shares the // comment form, so the generic nested split applies.
+	const text = '//@code const x: number = 1; // keep this comment normal';
+	const ranges = findCodeRanges(text, 'typescript', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code const x: number = 1; '],
+	);
+});
+
+test('ignores TypeScript markers with an explicit language name', () => {
+	const text = '/*@code(typescript) const x: number = 1;*/\n//@code(typescript) const y: string = "hello";';
+
+	assert.equal(findCodeRanges(text, 'typescript', true).length, 0);
+});

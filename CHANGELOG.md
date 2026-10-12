@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+- Add TypeScript support: `@code` and `$` markers in `//` and `/* */` comments
+
 ## 0.1.0
 
 - Add Go support: `@code` and `$` markers in `//` and `/* */` comments
