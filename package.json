@@ -1,8 +1,8 @@
 {
 	"name": "vscode-code-in-comments",
 	"displayName": "CodeInComments",
-	"description": "Highlight code blocks inside comments in VSCode!",
-	"version": "0.5.1",
+	"description": "Keep code examples, drafts and notes clean and readable directly inside your comments, with syntax highlighting for @code blocks.",
+	"version": "0.5.2",
 	"publisher": "renanrod",
 	"author": {
 		"name": "Renan Rodrigues de Meneses",
@@ -11,13 +11,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/renanrod4/vscode-comment-code-blocks.git"
+		"url": "https://github.com/renanrod4/vscode-code-in-comments.git"
 	},
-	"homepage": "https://github.com/renanrod4/vscode-comment-code-blocks",
+	"homepage": "https://github.com/renanrod4/vscode-code-in-comments",
 	"bugs": {
-		"url": "https://github.com/renanrod4/vscode-comment-code-blocks/issues"
+		"url": "https://github.com/renanrod4/vscode-code-in-comments/issues"
 	},
-	"license": "SEE LICENSE IN LICENSE",
+	"license": "MIT",
 	"icon": "public/icon.png",
 	"main": "./extension.js",
 	"activationEvents": [

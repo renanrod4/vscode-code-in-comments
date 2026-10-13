@@ -1,8 +1,13 @@
 # CodeInComments
 
-CodeInComments is a Visual Studio Code extension that highlights code markers
-inside comments while preserving the syntax highlighting of the current file
-language. The marked code receives configurable opacity and grayscale effects.
+[![Version](https://vsmarketplacebadges.dev/version-short/renanrod.vscode-code-in-comments.svg?label=VS%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=renanrod.vscode-code-in-comments)
+[![Installs](https://vsmarketplacebadges.dev/installs-short/renanrod.vscode-code-in-comments.svg)](https://marketplace.visualstudio.com/items?itemName=renanrod.vscode-code-in-comments)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+Keep code examples, drafts, and notes clean and readable directly inside your
+comments! CodeInComments highlights `@code`-marked comment blocks with the host
+language's syntax highlighting, applying subtle opacity and grayscale effects —
+it's a subtle difference that makes comments feel like a mini markdown editor.
 
 ![CodeInComments preview](public/example.webp)
 
@@ -23,6 +28,13 @@ console.log(message);
 The language is inferred from the host file, so markers stay concise and do not
 need a language name.
 
+## Supported languages
+
+JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, and Lua. Support for
+additional host languages is coming.
+
+## Abbreviations
+
 The `$` abbreviation can be enabled with `codeInComments.enableAbbreviations`:
 
 ```json
@@ -34,9 +46,6 @@ The `$` abbreviation can be enabled with `codeInComments.enableAbbreviations`:
 When enabled, `/*$ ... */`, `//$ ...`, and `#$ ...` are accepted as aliases for
 the corresponding implicit `@code` forms.
 
-Syntax highlighting for implicit markers is currently implemented for
-JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, and Lua. Support for
-additional host languages is pending.
 Comments nested inside marked code keep the normal comment color and are not
 affected by opacity or grayscale.
 
@@ -70,7 +79,8 @@ Keeps comments inside highlighted code at their normal color and prevents them
 from receiving opacity or grayscale. The default is `true`. Set it to `false`
 to apply the effects to the entire highlighted range.
 
-## Development
+<details>
+<summary><strong>Development</strong></summary>
 
 ### Requirements
 
@@ -97,7 +107,10 @@ npm test
 npm run build
 ```
 
-## Project structure
+</details>
+
+<details>
+<summary><strong>Project structure</strong></summary>
 
 ```text
 .
@@ -118,7 +131,4 @@ npm run build
     └── marker-ranges.test.js # Detector unit tests
 ```
 
-## Status
-
-The first functional version is implemented. Future versions may add support
-for more host languages and automated extension tests.
+</details>

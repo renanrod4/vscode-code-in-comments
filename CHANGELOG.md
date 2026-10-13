@@ -1,4 +1,11 @@
 # Changelog
+## 0.5.2
+
+- Rework README.md into a Marketplace-style page: badges, value proposition up front, technical sections collapsed
+- Update extension description in package.json
+- Fix repository, homepage and bugs URLs in package.json (old repo name)
+- Fix license field in package.json and fill in LICENSE author placeholder
+
 ## 0.5.1
 
 - Add commit links to changelog entries
