@@ -1,5 +1,7 @@
 # Changelog
+## 0.4.2
 
+- Add REASONING.md to help users understand the design decisions behind the extension.
 
 ## 0.4.1
 
