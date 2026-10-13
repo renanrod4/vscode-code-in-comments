@@ -88,8 +88,10 @@ are:
 - Rust: `comment.block.rust`, `comment.line.double-slash.rust`.
 - Python: `comment.line.number-sign.python`.
 - Go: `comment.block.go`, `comment.line.double-slash.go`.
-
-When a grammar is restricted to a comment scope, the comment delimiter may
+- C++: `comment.block.cpp`, `comment.line.double-slash.cpp`.
+The runtime splits marked ranges around nested line comments. This keeps
+comments such as `// comment` in JavaScript/Rust/Go/C++ and `# comment` in Python
+out of the opacity and grayscale decoration. to a comment scope, the comment delimiter may
 already have been consumed. Therefore the `begin` expression usually needs to
 match the marker content after `//`, `#`, or `/*`, rather than requiring the
 full delimiter again.

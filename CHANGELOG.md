@@ -1,4 +1,8 @@
 # Changelog
+## 0.5.0
+
+- Add C++ support: `@code` and `$` markers in `//` and `/* */` comments
+
 ## 0.4.2
 
 - Add REASONING.md to help users understand the design decisions behind the extension.

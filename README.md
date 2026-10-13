@@ -35,8 +35,8 @@ When enabled, `/*$ ... */`, `//$ ...`, and `#$ ...` are accepted as aliases for
 the corresponding implicit `@code` forms.
 
 Syntax highlighting for implicit markers is currently implemented for
-JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, and Lua. Support for additional
-host languages is pending.
+JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, and Lua. Support for
+additional host languages is pending.
 Comments nested inside marked code keep the normal comment color and are not
 affected by opacity or grayscale.
 
