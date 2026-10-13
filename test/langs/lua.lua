@@ -3,6 +3,7 @@ local a = 1
 --[[@code
 local k = 11
 ]]
+-- [[$ local o = 12]]
 
 local b = 2
 

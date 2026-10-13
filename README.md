@@ -101,31 +101,21 @@ npm run build
 
 ```text
 .
-├── extension.js
+├── .gitignore             # Git ignore rules
+├── .vscodeignore          # Extension packaging ignore rules
+├── DEVELOPMENT.md         # Development guide and checklist
+├── README.md              # Main documentation
+├── extension.js           # Entry point
+├── marker-ranges.js       # Code range detection logic
+├── package.json           # Project configuration and dependencies
 ├── public/
-│   └── example.webp
-├── syntaxes/
-│   ├── comment.message.go.json
-│   ├── comment.message.javascript.json
-│   ├── comment.message.javascriptreact.json
-│   ├── comment.message.lua.json
-│   ├── comment.message.python.json
-│   ├── comment.message.rust.json
-│   ├── comment.message.typescript.json
-│   └── comment.message.typescriptreact.json
-├── test/
-│   ├── langs/
-│   │   ├── go.go
-│   │   ├── js.js
-│   │   ├── jsx.jsx
-│   │   ├── lua.lua
-│   │   ├── py.py
-│   │   ├── rs.rs
-│   │   ├── ts.ts
-│   │   └── tsx.tsx
-│   └── test.js
-├── package.json
-└── README.md
+│   └── example.webp       # Visual example
+├── syntaxes/              # TextMate injection grammars
+│   ├── comment.message.*.json
+└── test/
+    ├── langs/             # Language fixtures for testing
+    │   └── *.{go,js,jsx,lua,py,rs,ts,tsx}
+    └── marker-ranges.test.js # Detector unit tests
 ```
 
 ## Status

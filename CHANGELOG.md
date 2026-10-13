@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 0.4.1
+
+- Update README.md project structure section to include more important files
+- Sort project structure files alphabetically in README.md
+- Remove DEVELOPMENT.md from .gitignore
+
 ## 0.4.0
 
 - Add Lua support: `@code` and `$` markers in `--` and `--[[ ]]` comments
