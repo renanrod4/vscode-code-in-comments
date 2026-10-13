@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Add Lua support: `@code` and `$` markers in `--` and `--[[ ]]` comments
+
 ## 0.3.0
 
 - Add JSX and TSX support: `@code` and `$` markers in `//` and `/* */` comments

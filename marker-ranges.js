@@ -10,12 +10,17 @@ function findCodeRanges(text, languageId, enableAbbreviations, preserveNestedCom
 		const markerPattern =
 			languageId === 'python'
 				? /^\s*#[ \t]*(?:@code|\$)(?!\()[ \t]*/
-				: text.slice(start, end).startsWith('/*')
-					? /^\/\*(?:@code|\$)(?!\()[ \t\r\n]*/
-					: /^\s*\/\/(?:@code|\$)(?!\()[ \t]*/;
+				: languageId === 'lua'
+					? text.slice(start, end).startsWith('--[')
+						? /^--\[=*\[(?:@code|\$)(?!\()[ \t\r\n]*/
+						: /^\s*--(?:@code|\$)(?!\()[ \t]*/
+					: text.slice(start, end).startsWith('/*')
+						? /^\/\*(?:@code|\$)(?!\()[ \t\r\n]*/
+						: /^\s*\/\/(?:@code|\$)(?!\()[ \t]*/;
 		const marker = text.slice(start, end).match(markerPattern);
 		const contentStart = marker ? start + marker[0].length : start;
-		const nestedCommentPattern = languageId === 'python' ? /#/g : /\/\//g;
+		const nestedCommentPattern =
+			languageId === 'python' ? /#/g : languageId === 'lua' ? /--/g : /\/\//g;
 		nestedCommentPattern.lastIndex = contentStart;
 		let segmentStart = start;
 		let nestedComment;
@@ -41,6 +46,28 @@ function findCodeRanges(text, languageId, enableAbbreviations, preserveNestedCom
 			? /^\s*#\s*(?:@code|\$)(?!\().*$/gm
 			: /^\s*#\s*@code(?!\().*$/gm;
 		while ((match = pythonLineCommentRegex.exec(text)) !== null) {
+			addMarkerRange(match.index, match[0].length);
+		}
+	}
+
+	if (languageId === 'lua') {
+		// Lua block comments are --[[ ]] or leveled --[=[ ]=]; lines use --.
+		const luaBlockCommentRegex = /--\[=*\[[\s\S]*?\]=*\]/g;
+		while ((match = luaBlockCommentRegex.exec(text)) !== null) {
+			const commentText = match[0];
+			const commentStart = match.index;
+			const marker = enableAbbreviations
+				? /--\[=*\[@code(?![(])[\s\S]*?\]=*\]|--\[=*\[\$(?![(])[\s\S]*?\]=*\]/g
+				: /--\[=*\[@code(?![(])[\s\S]*?\]=*\]/g;
+			let codeMatch;
+			while ((codeMatch = marker.exec(commentText)) !== null) {
+				addMarkerRange(commentStart + codeMatch.index, codeMatch[0].length);
+			}
+		}
+		const luaLineCommentRegex = enableAbbreviations
+			? /^\s*--(?:@code|\$)(?!\().*$/gm
+			: /^\s*--@code(?!\().*$/gm;
+		while ((match = luaLineCommentRegex.exec(text)) !== null) {
 			addMarkerRange(match.index, match[0].length);
 		}
 	}

@@ -1,0 +1,35 @@
+{
+	"$schema": "https://raw.githubusercontent.com/RedCMD/TmLanguage-Syntax-Highlighter/main/vscode.tmLanguage.schema.json",
+	"scopeName": "source.comment.message.lua",
+	"injectionSelector": "L:comment.block.lua, L:comment.line.double-dash.lua",
+	"patterns": [
+		{
+			"begin": "(?<=--)@code(?!\\()\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.lua",
+			"patterns": [{ "include": "source.lua" }]
+		},
+		{
+			"begin": "(?<=--)\\$\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.lua",
+			"patterns": [{ "include": "source.lua" }]
+		},
+		{
+			"begin": "@code(?!\\()\\s*",
+			"end": "(?=\\]\\])",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.lua",
+			"patterns": [{ "include": "source.lua" }]
+		},
+		{
+			"begin": "\\$\\s*",
+			"end": "(?=\\]\\])",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "meta.embedded.block.lua",
+			"patterns": [{ "include": "source.lua" }]
+		}
+	]
+}

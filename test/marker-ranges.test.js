@@ -188,3 +188,68 @@ test('does not decorate nested TSX comments', () => {
 		['//@code const x: number = 1; '],
 	);
 });
+
+test('finds implicit Lua block and line markers', () => {
+	const text = '--[[@code\nlocal k = 11\n]]\n--@code local m = 12';
+	const ranges = findCodeRanges(text, 'lua', false);
+
+	// Block markers are collected before line markers; order is not positional.
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['--[[@code\nlocal k = 11\n]]', '--@code local m = 12'],
+	);
+});
+
+test('finds leveled Lua block markers', () => {
+	const text = '--[=[@code\nlocal x = 1\n]=]';
+	const ranges = findCodeRanges(text, 'lua', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['--[=[@code\nlocal x = 1\n]=]'],
+	);
+});
+
+test('finds Lua dollar markers only when abbreviations are enabled', () => {
+	const text = '--[[$\nlocal n = 13\n]]\n--$ local p = 14';
+
+	assert.equal(findCodeRanges(text, 'lua', false).length, 0);
+	assert.equal(findCodeRanges(text, 'lua', true).length, 2);
+});
+
+test('does not decorate nested Lua comments', () => {
+	// Lua's nested comment delimiter is -- rather than //.
+	const text = '--@code local q = 15 -- keep this comment normal';
+	const ranges = findCodeRanges(text, 'lua', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['--@code local q = 15 '],
+	);
+});
+
+test('does not decorate nested Lua comments inside block markers', () => {
+	const text = '--[[@code\nlocal x = 1 -- note\n]]';
+	const ranges = findCodeRanges(text, 'lua', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['--[[@code\nlocal x = 1 ', ']]'],
+	);
+});
+
+test('can decorate nested Lua comments when preservation is disabled', () => {
+	const text = '--@code local q = 15 -- dim this too';
+	const ranges = findCodeRanges(text, 'lua', false, false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['--@code local q = 15 -- dim this too'],
+	);
+});
+
+test('ignores Lua markers with an explicit language name', () => {
+	const text = '--[[@code(lua) local x = 1]]\n--@code(lua) local y = 2';
+
+	assert.equal(findCodeRanges(text, 'lua', true).length, 0);
+});
