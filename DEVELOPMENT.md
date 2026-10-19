@@ -55,6 +55,7 @@ The current implicit syntax is:
 - Rust: block and line comments with `@code` and `$` aliases.
 - Python: `# @code ...` and `#$ ...` aliases when enabled.
 - Go: `/*@code ... */`, `//@code ...`, and `$` aliases when enabled.
+- C: `/*@code ... */`, `//@code ...`, and `$` aliases when enabled.
 
 The language is inferred from the host document, keeping markers independent
 of a second language identifier.
@@ -89,9 +90,11 @@ are:
 - Python: `comment.line.number-sign.python`.
 - Go: `comment.block.go`, `comment.line.double-slash.go`.
 - C++: `comment.block.cpp`, `comment.line.double-slash.cpp`.
+- C: `comment.block.c`, `comment.line.double-slash.c`.
+
 The runtime splits marked ranges around nested line comments. This keeps
-comments such as `// comment` in JavaScript/Rust/Go/C++ and `# comment` in Python
-out of the opacity and grayscale decoration. to a comment scope, the comment delimiter may
+comments such as `// comment` in JavaScript/Rust/Go/C++/C and `# comment` in Python
+out of the opacity and grayscale decoration. When injected into a comment scope, the comment delimiter may
 already have been consumed. Therefore the `begin` expression usually needs to
 match the marker content after `//`, `#`, or `/*`, rather than requiring the
 full delimiter again.

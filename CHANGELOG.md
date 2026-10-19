@@ -1,4 +1,8 @@
 # Changelog
+## 0.6.0
+
+- Add C support: `@code` and `$` markers in `//` and `/* */` comments
+
 ## 0.5.2
 
 - Rework README.md into a Marketplace-style page: badges, value proposition up front, technical sections collapsed

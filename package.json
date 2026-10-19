@@ -2,7 +2,7 @@
 	"name": "vscode-code-in-comments",
 	"displayName": "CodeInComments",
 	"description": "Keep code examples, drafts and notes clean and readable directly inside your comments, with syntax highlighting for @code blocks.",
-	"version": "0.5.2",
+	"version": "0.6.0",
 	"publisher": "renanrod",
 	"author": {
 		"name": "Renan Rodrigues de Meneses",
@@ -29,7 +29,8 @@
 		"onLanguage:python",
 		"onLanguage:go",
 		"onLanguage:lua",
-		"onLanguage:cpp"
+		"onLanguage:cpp",
+		"onLanguage:c"
 	],
 	"engines": {
 		"vscode": "^1.39.0"
@@ -149,6 +150,13 @@
 				"path": "./syntaxes/comment.message.lua.json",
 				"injectTo": [
 					"source.lua"
+				]
+			},
+			{
+				"scopeName": "source.comment.message.c",
+				"path": "./syntaxes/comment.message.c.json",
+				"injectTo": [
+					"source.c"
 				]
 			}
 		]

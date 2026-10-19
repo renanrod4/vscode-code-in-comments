@@ -30,7 +30,7 @@ need a language name.
 
 ## Supported languages
 
-JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, and Lua. Support for
+JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, C, and Lua. Support for
 additional host languages is coming.
 
 ## Abbreviations

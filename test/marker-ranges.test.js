@@ -132,6 +132,39 @@ test('ignores C++ markers with an explicit language name', () => {
 	assert.equal(findCodeRanges(text, 'cpp', true).length, 0);
 });
 
+test('finds implicit C block and line markers', () => {
+	const text = '/*@code\nvalue = 1;\n*/\n//@code other = 2';
+	const ranges = findCodeRanges(text, 'c', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['/*@code\nvalue = 1;\n*/', '//@code other = 2'],
+	);
+});
+
+test('finds C dollar markers only when abbreviations are enabled', () => {
+	const text = '/*$\nvalue = 1;\n*/\n//$ other = 2';
+
+	assert.equal(findCodeRanges(text, 'c', false).length, 0);
+	assert.equal(findCodeRanges(text, 'c', true).length, 2);
+});
+
+test('does not decorate nested C comments', () => {
+	const text = '//@code value = 1 // keep this comment normal';
+	const ranges = findCodeRanges(text, 'c', false);
+
+	assert.deepEqual(
+		ranges.map(range => text.slice(range.start, range.start + range.length)),
+		['//@code value = 1 '],
+	);
+});
+
+test('ignores C markers with an explicit language name', () => {
+	const text = '/*@code(c) value = 1*/\n//@code(c) other = 2';
+
+	assert.equal(findCodeRanges(text, 'c', true).length, 0);
+});
+
 test('finds implicit TypeScript block and line markers', () => {
 	const text = '/*@code\nconst x: number = 1;\n*/\n//@code const y: string = "hello";';
 	const ranges = findCodeRanges(text, 'typescript', false);
