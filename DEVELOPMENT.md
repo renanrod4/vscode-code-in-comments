@@ -15,14 +15,14 @@ are easy to miss when changing the extension.
 - `test/marker-ranges.test.js` tests marker detection without starting an
   Extension Development Host.
 - `test/langs/` contains manual fixtures for JavaScript, JSX, TypeScript, TSX,
-  Rust, Python, and Go.
+  Rust, Python, Go, C++, C, C#, and Lua.
 - `package.json` declares activation events, settings, grammars, and scripts.
 - `public/` contains the extension icon and README preview image.
 
 ## Runtime flow
 
-1. VS Code activates the extension for JavaScript, Rust, Python, or Go through
-   the `onLanguage` activation events in `package.json`.
+1. VS Code activates the extension for the supported languages through the
+   `onLanguage` activation events in `package.json`.
 2. `activate()` creates a `TextEditorDecorationType` using
    `codeInComments.opacity` and `codeInComments.grayscale`.
 
@@ -55,7 +55,9 @@ The current implicit syntax is:
 - Rust: block and line comments with `@code` and `$` aliases.
 - Python: `# @code ...` and `#$ ...` aliases when enabled.
 - Go: `/*@code ... */`, `//@code ...`, and `$` aliases when enabled.
+- C++: `/*@code ... */`, `//@code ...`, and `$` aliases when enabled.
 - C: `/*@code ... */`, `//@code ...`, and `$` aliases when enabled.
+- C#: `/*@code ... */`, `//@code ...`, and `$` aliases when enabled.
 
 The language is inferred from the host document, keeping markers independent
 of a second language identifier.
@@ -75,9 +77,9 @@ to comment scopes:
 "injectionSelector": "L:comment.block.js, L:comment.line.double-slash.js"
 ```
 
-Using `source.rust` or `source.python` as the selector is too broad. It can
-make ordinary comments lose their native comment color or cause the injected
-grammar to compete with the entire host grammar.
+Using the whole source, such as `L:source.rust`, as the selector is too broad.
+It can make ordinary comments lose their native comment color or cause the
+injected grammar to compete with the entire host grammar.
 
 The exact comment scopes come from the host language grammar. Common examples
 are:
@@ -86,11 +88,31 @@ are:
 - JSX: `comment.block.js.jsx`, `comment.line.double-slash.js.jsx`.
 - TypeScript: `comment.block.ts`, `comment.line.double-slash.ts`.
 - TSX: `comment.block.tsx`, `comment.line.double-slash.tsx`.
-- Rust: `comment.block.rust`, `comment.line.double-slash.rust`.
-- Python: `comment.line.number-sign.python`.
 - Go: `comment.block.go`, `comment.line.double-slash.go`.
 - C++: `comment.block.cpp`, `comment.line.double-slash.cpp`.
 - C: `comment.block.c`, `comment.line.double-slash.c`.
+
+Some host grammars cannot use scoped selectors. Rust, Python, and C# define
+line comments with `begin`/`while` rules, so `L:comment.line.*` injections
+never match inside them. Those languages inject into the whole source and
+compensate with anchored line rules:
+
+```json
+"injectionSelector": "L:source.cs",
+"begin": "^[ \\t]*//[ \\t]*@code(?!\\()\\s*"
+```
+
+The `^[ \t]*` anchor keeps the rule from matching inside ordinary code, and
+`comment.code.block` is added to `contentName` so the host's comment color is
+still removed from the highlighted content.
+
+C# has a second quirk: the host's `while` rule consumes every consecutive `//`
+line, so a plain `// comment` line above a `//@code` line swallows the marker
+into the host's begin/while region, where anchored injection rules never fire.
+The C# grammar therefore also defines its own `begin`/`while` line-comment rule
+(named `comment.line.double-slash.cs`) that claims the comment run first,
+colors ordinary lines as comments, and starts the embedded region from inner
+patterns when a marked line appears.
 
 The runtime splits marked ranges around nested line comments. This keeps
 comments such as `// comment` in JavaScript/Rust/Go/C++/C and `# comment` in Python

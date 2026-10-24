@@ -1,4 +1,8 @@
 # Changelog
+## 0.7.0
+
+- Add C# support: `@code` and `$` markers in `//` and `/* */` comments
+
 ## 0.6.0
 
 - Add C support: `@code` and `$` markers in `//` and `/* */` comments

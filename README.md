@@ -30,7 +30,7 @@ need a language name.
 
 ## Supported languages
 
-JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, C, and Lua. Support for
+JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, C++, C, C#, and Lua. Support for
 additional host languages is coming.
 
 ## Abbreviations
@@ -94,8 +94,7 @@ npm install
 ```
 
 Open the project in VS Code and press `F5` to start an Extension Development
-Host. Open a JavaScript, JSX, TypeScript, TSX, Rust, Python, Go, or Lua file
-containing a supported marker.
+Host. Open a file in any supported language containing a supported marker.
 
 ### Validate
 
@@ -127,7 +126,7 @@ npm run build
 │   ├── comment.message.*.json
 └── test/
     ├── langs/             # Language fixtures for testing
-    │   └── *.{go,js,jsx,lua,py,rs,ts,tsx}
+    │   └── *.{c,cpp,cs,go,js,jsx,lua,py,rs,ts,tsx}
     └── marker-ranges.test.js # Detector unit tests
 ```
 

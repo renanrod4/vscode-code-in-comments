@@ -1,0 +1,68 @@
+{
+	"$schema": "https://raw.githubusercontent.com/RedCMD/TmLanguage-Syntax-Highlighter/main/vscode.tmLanguage.schema.json",
+	"scopeName": "source.comment.message.csharp",
+	"injectionSelector": "L:source.cs",
+	"patterns": [
+		{
+			"begin": "^[ \\t]*//[ \\t]*@code(?!\\()\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "comment.code.block meta.embedded.block.cs",
+			"patterns": [{ "include": "source.cs" }]
+		},
+		{
+			"begin": "^[ \\t]*//[ \\t]*\\$\\s*",
+			"end": "$",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "comment.code.block meta.embedded.block.cs",
+			"patterns": [{ "include": "source.cs" }]
+		},
+		{
+			"name": "comment.line.double-slash.cs",
+			"begin": "^([ \\t]+)?(//)(?!/)",
+			"while": "^([ \\t]*)(//)(?!/)",
+			"beginCaptures": {
+				"1": { "name": "punctuation.whitespace.comment.leading.cs" },
+				"2": { "name": "punctuation.definition.comment.cs" }
+			},
+			"whileCaptures": {
+				"1": { "name": "punctuation.whitespace.comment.leading.cs" },
+				"2": { "name": "punctuation.definition.comment.cs" }
+			},
+			"patterns": [
+				{
+					"match": "(?![ \\t]*(?:@code(?!\\()|\\$))[^\\n]*",
+					"name": "comment.line.double-slash.cs"
+				},
+				{
+					"begin": "[ \\t]*@code(?!\\()\\s*",
+					"end": "$",
+					"beginCaptures": { "0": { "name": "comment.code.block" } },
+					"contentName": "comment.code.block meta.embedded.block.cs",
+					"patterns": [{ "include": "source.cs" }]
+				},
+				{
+					"begin": "[ \\t]*\\$\\s*",
+					"end": "$",
+					"beginCaptures": { "0": { "name": "comment.code.block" } },
+					"contentName": "comment.code.block meta.embedded.block.cs",
+					"patterns": [{ "include": "source.cs" }]
+				}
+			]
+		},
+		{
+			"begin": "@code(?!\\()\\s*",
+			"end": "(?=\\*/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "comment.code.block meta.embedded.block.cs",
+			"patterns": [{ "include": "source.cs" }]
+		},
+		{
+			"begin": "\\$\\s*",
+			"end": "(?=\\*/)",
+			"beginCaptures": { "0": { "name": "comment.code.block" } },
+			"contentName": "comment.code.block meta.embedded.block.cs",
+			"patterns": [{ "include": "source.cs" }]
+		}
+	]
+}
